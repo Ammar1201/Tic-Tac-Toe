@@ -1,34 +1,11 @@
 
 const boxes = document.querySelectorAll('div.box');
 const board = [[-1, -1, -1],[-1, -1, -1],[-1, -1, -1]];
+// const board = [[undefined, undefined, undefined],[undefined, undefined, undefined],[undefined, undefined, undefined]];
 const played = [false, false, false, false, false, false, false, false, false, false];
 let lastPlayed = 0;//1 = X, 0 = O
 
-console.log(board);
-
-const checkDraw = () => {
-  let counter = 0;
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      if (board[i][j] == 1 || board[i][j] == 0) {
-        counter += 1;
-      }
-    }
-  }
-  if (counter == board.length) {
-    return true; //* draw
-  }
-  return false; //* no draw
-};
-
-const checkWinner = (arr) => {
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
-      if (arr[i][j] == 1) {
-      }
-    }
-  }
-}
+// console.log(board);
 
 const checkPlayedBefore = (id) => {
   let index = id[3];
@@ -98,6 +75,37 @@ const play = (target, id) => {
   }
 }
 
+const checkDraw = (arr) => {
+  let counter = 0;
+  // for (let i = 0; i < arr.length; i++) {
+  //   for (let j = 0; j < arr[i].length; j++) {
+  //     if (arr[i][j] == 1 || arr[i][j] == 0) {
+  //       counter += 1;
+  //     }
+  //   }
+  // }
+  for (let i = 1; i < played.length; i++) {
+    if (played[i]) {
+      counter += 1;
+    }
+  }
+
+  if (counter == played.length - 1) {
+    return true; //* draw
+  }
+
+  return false; //* no draw
+};
+
+const checkWinner = (arr) => {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if (arr[i][j] == 1) {
+      }
+    }
+  }
+}
+
 boxes.forEach((box) => {
     box.addEventListener('click', (event) => {
       const target = event.target;
@@ -106,11 +114,11 @@ boxes.forEach((box) => {
         return;
       }
       play(target, id);
-      if(checkDraw()) {
-        // alert('draw');
+      if(checkDraw(board)) {
         console.log('draw');
       }
-      console.log(board);
+      // console.log(board);
+      // console.log(played);
       // console.log(target.id);
       // console.log(lastPlayed);
       // console.log(target);
