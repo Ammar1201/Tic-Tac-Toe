@@ -1,8 +1,8 @@
 
 const boxes = document.querySelectorAll('div.box');
 const board = [[-1, -1, -1],[-1, -1, -1],[-1, -1, -1]];
-// const board = [[undefined, undefined, undefined],[undefined, undefined, undefined],[undefined, undefined, undefined]];
 const played = [false, false, false, false, false, false, false, false, false, false];
+const resetBtn = document.querySelector('#reset');
 let lastPlayed = 0;//1 = X, 0 = O
 
 // console.log(board);
@@ -75,15 +75,8 @@ const play = (target, id) => {
   }
 }
 
-const checkDraw = (arr) => {
+const checkDraw = () => {
   let counter = 0;
-  // for (let i = 0; i < arr.length; i++) {
-  //   for (let j = 0; j < arr[i].length; j++) {
-  //     if (arr[i][j] == 1 || arr[i][j] == 0) {
-  //       counter += 1;
-  //     }
-  //   }
-  // }
   for (let i = 1; i < played.length; i++) {
     if (played[i]) {
       counter += 1;
@@ -93,18 +86,116 @@ const checkDraw = (arr) => {
   if (counter == played.length - 1) {
     return true; //* draw
   }
-
   return false; //* no draw
 };
 
 const checkWinner = (arr) => {
+  let xcount = 0;
+  let ocount = 0;
+
+  // return 1 if x wins
+  // return 0 if o wins
+
+  for (let i = 0; i < arr[0].length; i++) {
+    if (arr[0][i] == 1) {
+      xcount += 1;
+    }
+    else if(arr[0][i] == 0) {
+      ocount += 1;
+    }
+
+    if(xcount == 3) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  }
+
+  for (let i = 0; i < arr[1].length; i++) {
+    if (arr[0][i] == 1) {
+      xcount += 1;
+    }
+    else if(arr[0][i] == 0) {
+      ocount += 1;
+    }
+
+    if(xcount == 3) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  }
+
+  for (let i = 0; i < arr[2].length; i++) {
+    if (arr[0][i] == 1) {
+      xcount += 1;
+    }
+    else if(arr[0][i] == 0) {
+      ocount += 1;
+    }
+
+    if(xcount == 3) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  }
+
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0; j < arr[i].length; j++) {
-      if (arr[i][j] == 1) {
-      }
+    }
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+    }
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+    }
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+    }
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+    }
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+    }
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
     }
   }
 }
+
+const reset = () => {
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach(btn => {
+    btn.remove();
+  });
+
+  for(let i = 1; i < played.length; i++) {
+    played[i] = false;
+  }
+
+  for(let i = 0; i < board.length; i++) {
+    for(let j = 0; j < board[i].length; j++) {
+      board[i][j] = -1;
+    }
+  }
+};
 
 boxes.forEach((box) => {
     box.addEventListener('click', (event) => {
@@ -114,7 +205,7 @@ boxes.forEach((box) => {
         return;
       }
       play(target, id);
-      if(checkDraw(board)) {
+      if(checkDraw()) {
         console.log('draw');
       }
       // console.log(board);
@@ -128,3 +219,5 @@ boxes.forEach((box) => {
         capture : true
     });
 });
+
+resetBtn.addEventListener('click', reset);

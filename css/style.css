@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.container {
+.board {
   width: 700px;
   height: 600px;
   /* background: red; */
@@ -34,6 +34,20 @@ button {
   background: transparent;
   color: black;
   /* visibility: hidden; */
+}
+
+.reset {
+  text-align: center;
+  /* margin-top: 20px; */
+}
+
+.reset:hover {
+  cursor: pointer;
+}
+
+.reset input {
+  margin-top: 20px;
+  padding: .5rem 2rem; 
 }
 
 /* .box::before {
