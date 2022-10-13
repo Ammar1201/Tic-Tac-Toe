@@ -3,6 +3,7 @@ const boxes = document.querySelectorAll('div.box');
 const board = [[-1, -1, -1],[-1, -1, -1],[-1, -1, -1]];
 const played = [false, false, false, false, false, false, false, false, false, false];
 const resetBtn = document.querySelector('#reset');
+let gameOver = false;
 let lastPlayed = 0;//1 = X, 0 = O
 
 // console.log(board);
@@ -96,6 +97,7 @@ const checkWinner = (arr) => {
   // return 1 if x wins
   // return 0 if o wins
 
+  //! ----------------rows------------------------
   for (let i = 0; i < arr[0].length; i++) {
     if (arr[0][i] == 1) {
       xcount += 1;
@@ -107,77 +109,151 @@ const checkWinner = (arr) => {
     if(xcount == 3) {
       return 1;
     }
-    else {
+    else if(ocount == 3) {
       return 0;
     }
   }
 
+  xcount = 0;
+  ocount = 0;
+
+  //* --------------------------------------------
   for (let i = 0; i < arr[1].length; i++) {
-    if (arr[0][i] == 1) {
+    if (arr[1][i] == 1) {
       xcount += 1;
     }
-    else if(arr[0][i] == 0) {
+    else if(arr[1][i] == 0) {
       ocount += 1;
     }
 
     if(xcount == 3) {
       return 1;
     }
-    else {
+    else if(ocount == 3) {
       return 0;
     }
   }
 
+  xcount = 0;
+  ocount = 0;
+
+  //* --------------------------------------------
   for (let i = 0; i < arr[2].length; i++) {
-    if (arr[0][i] == 1) {
+    if (arr[2][i] == 1) {
       xcount += 1;
     }
-    else if(arr[0][i] == 0) {
+    else if(arr[2][i] == 0) {
       ocount += 1;
     }
 
     if(xcount == 3) {
       return 1;
     }
-    else {
+    else if(ocount == 3) {
       return 0;
     }
   }
 
+  xcount = 0;
+  ocount = 0;
+
+  //! ----------------columns------------------------
   for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
+    if (arr[i][0] == 1) {
+      xcount += 1;
+    }
+    else if(arr[i][0] == 0) {
+      ocount += 1;
+    }
+
+    if(xcount == 3) {
+      return 1;
+    }
+    else if(ocount == 3) {
+      return 0;
     }
   }
 
+  xcount = 0;
+  ocount = 0;
+
+  //* --------------------------------------------
   for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
+    if (arr[i][1] == 1) {
+      xcount += 1;
+    }
+    else if(arr[i][1] == 0) {
+      ocount += 1;
+    }
+
+    if(xcount == 3) {
+      return 1;
+    }
+    else if(ocount == 3) {
+      return 0;
     }
   }
 
+  xcount = 0;
+  ocount = 0;
+
+  //* --------------------------------------------
   for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
+    if (arr[i][2] == 1) {
+      xcount += 1;
+    }
+    else if(arr[i][2] == 0) {
+      ocount += 1;
+    }
+
+    if(xcount == 3) {
+      return 1;
+    }
+    else if(ocount == 3) {
+      return 0;
     }
   }
 
+  xcount = 0;
+  ocount = 0;
+
+  //! ----------------diagonals------------------------
   for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
+    if (arr[i][i] == 1) {
+      xcount += 1;
+    }
+    else if(arr[i][i] == 0) {
+      ocount += 1;
+    }
+
+    if(xcount == 3) {
+      return 1;
+    }
+    else if(ocount == 3) {
+      return 0;
     }
   }
 
+  xcount = 0;
+  ocount = 0;
+
+  //* --------------------------------------------
   for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
+    if (arr[i][arr.length - i - 1] == 1) {
+      xcount += 1;
+    }
+    else if(arr[i][arr.length - i - 1] == 0) {
+      ocount += 1;
+    }
+
+    if(xcount == 3) {
+      return 1;
+    }
+    else if(ocount == 3) {
+      return 0;
     }
   }
 
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
-    }
-  }
-
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
-    }
-  }
 }
 
 const reset = () => {
@@ -195,19 +271,37 @@ const reset = () => {
       board[i][j] = -1;
     }
   }
+
+  lastPlayed = 0;
+
+  gameOver = false;
 };
 
 boxes.forEach((box) => {
     box.addEventListener('click', (event) => {
+
+      if(gameOver) { return; } 
+
       const target = event.target;
       const id = target.id;
-      if(checkPlayedBefore(id)) {
-        return;
-      }
+
+      if(checkPlayedBefore(id)) { return; }
+
       play(target, id);
+
       if(checkDraw()) {
         console.log('draw');
       }
+
+      if(checkWinner(board) == 1) {
+        console.log('x wins');
+        gameOver = true;
+      }
+      else if(checkWinner(board) == 0) {
+        console.log('o wins');
+        gameOver = true;
+      }
+
       // console.log(board);
       // console.log(played);
       // console.log(target.id);
