@@ -4,9 +4,7 @@ const board = [[-1, -1, -1],[-1, -1, -1],[-1, -1, -1]];
 const played = [false, false, false, false, false, false, false, false, false, false];
 const resetBtn = document.querySelector('#reset');
 let gameOver = false;
-let lastPlayed = 0;//1 = X, 0 = O
-
-// console.log(board);
+let lastPlayed = 0;//! 1 = X, 0 = O
 
 const checkPlayedBefore = (id) => {
   let index = id[3];
@@ -76,7 +74,7 @@ const play = (target, id) => {
   }
 }
 
-const checkDraw = () => {
+const checkTie = () => {
   let counter = 0;
   for (let i = 1; i < played.length; i++) {
     if (played[i]) {
@@ -94,10 +92,17 @@ const checkWinner = (arr) => {
   let xcount = 0;
   let ocount = 0;
 
-  // return 1 if x wins
-  // return 0 if o wins
+  //! --------------------
+  /*
+    return 1 if x wins
+    return 0 if o wins
+  */
+  //! --------------------
 
   //! ----------------rows------------------------
+
+  //* First row ---------------------------------
+
   for (let i = 0; i < arr[0].length; i++) {
     if (arr[0][i] == 1) {
       xcount += 1;
@@ -117,7 +122,7 @@ const checkWinner = (arr) => {
   xcount = 0;
   ocount = 0;
 
-  //* --------------------------------------------
+  //* Second row ---------------------------------
   for (let i = 0; i < arr[1].length; i++) {
     if (arr[1][i] == 1) {
       xcount += 1;
@@ -137,7 +142,7 @@ const checkWinner = (arr) => {
   xcount = 0;
   ocount = 0;
 
-  //* --------------------------------------------
+  //* Third row ---------------------------------
   for (let i = 0; i < arr[2].length; i++) {
     if (arr[2][i] == 1) {
       xcount += 1;
@@ -158,6 +163,9 @@ const checkWinner = (arr) => {
   ocount = 0;
 
   //! ----------------columns------------------------
+
+  //* First column -----------------------------------
+
   for (let i = 0; i < arr.length; i++) {
     if (arr[i][0] == 1) {
       xcount += 1;
@@ -177,7 +185,7 @@ const checkWinner = (arr) => {
   xcount = 0;
   ocount = 0;
 
-  //* --------------------------------------------
+  //* Second column ---------------------------------
   for (let i = 0; i < arr.length; i++) {
     if (arr[i][1] == 1) {
       xcount += 1;
@@ -197,7 +205,7 @@ const checkWinner = (arr) => {
   xcount = 0;
   ocount = 0;
 
-  //* --------------------------------------------
+  //* Third column ---------------------------------
   for (let i = 0; i < arr.length; i++) {
     if (arr[i][2] == 1) {
       xcount += 1;
@@ -218,6 +226,9 @@ const checkWinner = (arr) => {
   ocount = 0;
 
   //! ----------------diagonals------------------------
+
+  //? Main diagonal ------------------------------------
+
   for (let i = 0; i < arr.length; i++) {
     if (arr[i][i] == 1) {
       xcount += 1;
@@ -237,7 +248,7 @@ const checkWinner = (arr) => {
   xcount = 0;
   ocount = 0;
 
-  //* --------------------------------------------
+   //? Secondary diagonal -----------------------------
   for (let i = 0; i < arr.length; i++) {
     if (arr[i][arr.length - i - 1] == 1) {
       xcount += 1;
@@ -275,6 +286,15 @@ const reset = () => {
   lastPlayed = 0;
 
   gameOver = false;
+
+  const winMsgX = document.querySelector('#labelx');
+  winMsgX.style.visibility = 'hidden';
+
+  const winMsgO = document.querySelector('#labelo');
+  winMsgO.style.visibility = 'hidden';
+
+  const tieMsg = document.querySelector('#labelTie');
+  tieMsg.style.visibility = 'hidden';
 };
 
 boxes.forEach((box) => {
@@ -289,24 +309,23 @@ boxes.forEach((box) => {
 
       play(target, id);
 
-      if(checkDraw()) {
-        console.log('draw');
-      }
+      const checkWin = checkWinner(board); //* to call the function once not twice in the two ifs
 
-      if(checkWinner(board) == 1) {
-        console.log('x wins');
+      if(checkWin == 1) {
+        const winMsg = document.querySelector('#labelx');
+        winMsg.style.visibility = 'visible';
         gameOver = true;
       }
-      else if(checkWinner(board) == 0) {
-        console.log('o wins');
+      else if(checkWin == 0) {
+        const winMsg = document.querySelector('#labelo');
+        winMsg.style.visibility = 'visible';
+        gameOver = true;
+      }else if(checkTie()) {
+        const tieMsg = document.querySelector('#labelTie');
+        tieMsg.style.visibility = 'visible';
         gameOver = true;
       }
 
-      // console.log(board);
-      // console.log(played);
-      // console.log(target.id);
-      // console.log(lastPlayed);
-      // console.log(target);
       event.preventDefault();
     },
     {

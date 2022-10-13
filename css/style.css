@@ -4,12 +4,19 @@
   box-sizing: border-box;
 }
 
+.welcome {
+  text-align: center;
+}
+
+.welcome h1, .welcome h2, .welcome h3, .welcome h4, .welcome h5, .welcome h6{
+  margin-top: 20px;
+}
+
 .board {
   width: 700px;
   height: 600px;
-  /* background: red; */
   margin: auto;
-  margin-top: 15vh;
+  margin-top: 5vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -33,12 +40,30 @@ button {
   border: none;
   background: transparent;
   color: black;
-  /* visibility: hidden; */
+}
+
+label {
+  z-index: 1;
+  font-size: 6rem;
+  color: red;
+  visibility: hidden;
+}
+
+.winMsg {
+  display: flex;
+  justify-content: center;
+}
+
+#labelx {
+  z-index: 1;
+}
+
+#labelo {
+  z-index: 2;
 }
 
 .reset {
   text-align: center;
-  /* margin-top: 20px; */
 }
 
 .reset:hover {
@@ -49,21 +74,3 @@ button {
   margin-top: 20px;
   padding: .5rem 2rem; 
 }
-
-/* .box::before {
-  content: 'X';
-  position: absolute;
-  top: 0;
-  left: 58.891px;
-  font-size: 10rem;
-  visibility: hidden;
-}
-
-.box::after {
-  content: 'O';
-  position: absolute;
-  top: 0;
-  left: 58.891px;
-  font-size: 10rem;
-  visibility: hidden;
-} */
