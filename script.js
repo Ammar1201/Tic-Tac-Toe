@@ -61,6 +61,7 @@ const play = (target, id) => {
     lastPlayed = 1;
     const btnX = document.createElement('button');
     btnX.textContent = 'X';
+    btnX.style.color = 'purple';
     btnX.setAttribute('disabled', 'true');
     target.append(btnX);
   }
@@ -69,6 +70,7 @@ const play = (target, id) => {
     lastPlayed = 0;
     const btnO = document.createElement('button');
     btnO.textContent = 'O';
+    btnO.style.color = 'red';
     btnO.setAttribute('disabled', 'true');
     target.append(btnO);
   }

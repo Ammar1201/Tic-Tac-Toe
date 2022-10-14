@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+body {
+  background: url(../img/background.jpg) repeat scroll;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .welcome {
   text-align: center;
 }
@@ -16,15 +22,15 @@
   width: 700px;
   height: 600px;
   margin: auto;
-  margin-top: 5vh;
+  margin-top: 3vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  border: 4px solid black;
+  /* border: 4px solid black; */
 }
 
 .box {
-  border: 1px solid black;
+  border: 4px solid #0783B8;
   position: relative;
 }
 
@@ -39,31 +45,26 @@ button {
   font-size: 10rem;
   border: none;
   background: transparent;
-  color: black;
+  /* color: white; */
 }
 
 label {
   z-index: 1;
   font-size: 6rem;
-  color: red;
+  color: cornflowerblue;
   visibility: hidden;
 }
 
 .winMsg {
   display: flex;
   justify-content: center;
-}
-
-#labelx {
-  z-index: 1;
-}
-
-#labelo {
-  z-index: 2;
+  margin-top: 20px;
 }
 
 .reset {
   text-align: center;
+  margin-top: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .reset:hover {
@@ -73,4 +74,40 @@ label {
 .reset input {
   margin-top: 20px;
   padding: .5rem 2rem; 
+}
+
+#box1 {
+  border-top: none;
+  border-left: none;
+}
+
+#box2 {
+  border-top: none;
+}
+
+#box3 {
+  border-top: none;
+  border-right: none;
+}
+
+#box4 {
+  border-left: none;
+}
+
+#box6 {
+  border-right: none;
+}
+
+#box7 {
+  border-left: none;
+  border-bottom: none;
+}
+
+#box8 {
+  border-bottom: none;
+}
+
+#box9 {
+  border-right: none;
+  border-bottom: none;
 }
