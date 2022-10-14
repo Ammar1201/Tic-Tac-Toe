@@ -22,11 +22,10 @@ body {
   width: 700px;
   height: 600px;
   margin: auto;
-  margin-top: 3vh;
+  margin-top: 4vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  /* border: 4px solid black; */
 }
 
 .box {
@@ -45,26 +44,25 @@ button {
   font-size: 10rem;
   border: none;
   background: transparent;
-  /* color: white; */
 }
 
 label {
   z-index: 1;
-  font-size: 6rem;
+  font-size: 4rem;
   color: cornflowerblue;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 .winMsg {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  gap: 2.5rem;
 }
 
 .reset {
   text-align: center;
   margin-top: 20px;
-  /* margin-bottom: 20px; */
 }
 
 .reset:hover {
@@ -72,8 +70,11 @@ label {
 }
 
 .reset input {
+  /* margin-top: 20px;
+  padding: .5rem 2rem;  */
   margin-top: 20px;
-  padding: .5rem 2rem; 
+  padding: 1rem 2rem; 
+  font-size: 1rem;
 }
 
 #box1 {
@@ -110,4 +111,122 @@ label {
 #box9 {
   border-right: none;
   border-bottom: none;
+}
+
+@media (max-width: 468px) {
+  .board {
+    width: 600px;
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+
+  .welcome {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    width: 700px;
+  }
+
+  .reset {
+    text-align: center;
+    margin-left: 245px;
+    margin-top: 50px;
+  }
+
+  .reset input {
+    margin-top: 20px;
+    padding: 1rem 4rem; 
+    font-size: 2rem;
+  }
+
+  .winMsg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 700px;
+    text-align: center;
+  }
+
+  label {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 680px) and (min-width: 469px) {
+  .board {
+    width: 600px;
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+
+  .welcome {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    width: 700px;
+  }
+
+  .reset {
+    text-align: center;
+    margin-left: 245px;
+    margin-top: 50px;
+  }
+
+  .reset input {
+    margin-top: 20px;
+    padding: 1rem 4rem; 
+    font-size: 2rem;
+  }
+
+  .winMsg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 700px;
+    text-align: center;
+  }
+
+  label {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 681px) {
+  .winMsg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+  }
+
+  label {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .winMsg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+  }
+
+  label {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 1440px) and (min-width: 1025px) {
+  .winMsg {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+  }
+
+  label {
+    font-size: 3.5rem;
+  }
 }
