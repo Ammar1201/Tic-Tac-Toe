@@ -50,7 +50,7 @@ label {
   z-index: 1;
   font-size: 4rem;
   color: cornflowerblue;
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 
 .winMsg {
@@ -65,16 +65,14 @@ label {
   margin-top: 20px;
 }
 
-.reset:hover {
-  cursor: pointer;
+.reset input {
+  margin-top: 20px;
+  padding: 1rem 5rem; 
+  font-size: 1rem;
 }
 
-.reset input {
-  /* margin-top: 20px;
-  padding: .5rem 2rem;  */
-  margin-top: 20px;
-  padding: 1rem 2rem; 
-  font-size: 1rem;
+.reset input:hover {
+  cursor: pointer;
 }
 
 #box1 {

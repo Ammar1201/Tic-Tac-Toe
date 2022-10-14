@@ -1,14 +1,16 @@
 
-const boxes = document.querySelectorAll('div.box');
-const board = [[-1, -1, -1],[-1, -1, -1],[-1, -1, -1]];
-const played = [false, false, false, false, false, false, false, false, false, false];
-const resetBtn = document.querySelector('#reset');
-let gameOver = false;
-let lastPlayed = 0;//! 1 = X, 0 = O
+const vars = {
+  boxes: document.querySelectorAll('div.box'),
+  board: [[-1, -1, -1],[-1, -1, -1],[-1, -1, -1]],
+  played: [false, false, false, false, false, false, false, false, false, false],
+  resetBtn: document.querySelector('#reset'),
+  gameOver: false,
+  lastPlayed: 0 //! 1 = X, 0 = O
+}
 
 const checkPlayedBefore = (id) => {
   let index = id[3];
-  if (played[index]) {
+  if (vars.played[index]) {
     return true;
   }
   return false;
@@ -17,48 +19,48 @@ const checkPlayedBefore = (id) => {
 const countMove = (id, move) => {
   switch(id) {
     case 'box1':
-      board[0][0] = move;
-      played[1] = true;
+      vars.board[0][0] = move;
+      vars.played[1] = true;
       break;
     case 'box2':
-      board[0][1] = move;
-      played[2] = true;
+      vars.board[0][1] = move;
+      vars.played[2] = true;
       break;
     case 'box3':
-      board[0][2] = move;
-      played[3] = true;
+      vars.board[0][2] = move;
+      vars.played[3] = true;
       break;
     case 'box4':
-      board[1][0] = move;
-      played[4] = true;
+      vars.board[1][0] = move;
+      vars.played[4] = true;
       break;
     case 'box5':
-      board[1][1] = move;
-      played[5] = true;
+      vars.board[1][1] = move;
+      vars.played[5] = true;
       break;
     case 'box6':
-      board[1][2] = move;
-      played[6] = true;
+      vars.board[1][2] = move;
+      vars.played[6] = true;
       break;
     case 'box7':
-      board[2][0] = move;
-      played[7] = true;
+      vars.board[2][0] = move;
+      vars.played[7] = true;
       break;
     case 'box8':
-      board[2][1] = move;
-      played[8] = true;
+      vars.board[2][1] = move;
+      vars.played[8] = true;
       break;
     case 'box9':
-      board[2][2] = move;
-      played[9] = true;
+      vars.board[2][2] = move;
+      vars.played[9] = true;
       break;
   }
 };
 
 const play = (target, id) => {
-  if(lastPlayed === 0) {
+  if(vars.lastPlayed === 0) {
     countMove(id, 1);
-    lastPlayed = 1;
+    vars.lastPlayed = 1;
     const btnX = document.createElement('button');
     btnX.textContent = 'X';
     btnX.style.color = 'purple';
@@ -67,7 +69,7 @@ const play = (target, id) => {
   }
   else {
     countMove(id, 0);
-    lastPlayed = 0;
+    vars.lastPlayed = 0;
     const btnO = document.createElement('button');
     btnO.textContent = 'O';
     btnO.style.color = 'red';
@@ -78,19 +80,19 @@ const play = (target, id) => {
 
 const checkTie = () => {
   let counter = 0;
-  for (let i = 1; i < played.length; i++) {
-    if (played[i]) {
+  for (let i = 1; i < vars.played.length; i++) {
+    if (vars.played[i]) {
       counter += 1;
     }
   }
 
-  if (counter == played.length - 1) {
+  if (counter == vars.played.length - 1) {
     return true; //* draw
   }
   return false; //* no draw
 };
 
-const checkWinner = (arr) => {
+const checkWinner = () => {
   let xcount = 0;
   let ocount = 0;
 
@@ -105,11 +107,11 @@ const checkWinner = (arr) => {
 
   //* First row ---------------------------------
 
-  for (let i = 0; i < arr[0].length; i++) {
-    if (arr[0][i] == 1) {
+  for (let i = 0; i < vars.board[0].length; i++) {
+    if (vars.board[0][i] == 1) {
       xcount += 1;
     }
-    else if(arr[0][i] == 0) {
+    else if(vars.board[0][i] == 0) {
       ocount += 1;
     }
 
@@ -125,11 +127,11 @@ const checkWinner = (arr) => {
   ocount = 0;
 
   //* Second row ---------------------------------
-  for (let i = 0; i < arr[1].length; i++) {
-    if (arr[1][i] == 1) {
+  for (let i = 0; i < vars.board[1].length; i++) {
+    if (vars.board[1][i] == 1) {
       xcount += 1;
     }
-    else if(arr[1][i] == 0) {
+    else if(vars.board[1][i] == 0) {
       ocount += 1;
     }
 
@@ -145,11 +147,11 @@ const checkWinner = (arr) => {
   ocount = 0;
 
   //* Third row ---------------------------------
-  for (let i = 0; i < arr[2].length; i++) {
-    if (arr[2][i] == 1) {
+  for (let i = 0; i < vars.board[2].length; i++) {
+    if (vars.board[2][i] == 1) {
       xcount += 1;
     }
-    else if(arr[2][i] == 0) {
+    else if(vars.board[2][i] == 0) {
       ocount += 1;
     }
 
@@ -168,11 +170,11 @@ const checkWinner = (arr) => {
 
   //* First column -----------------------------------
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i][0] == 1) {
+  for (let i = 0; i < vars.board.length; i++) {
+    if (vars.board[i][0] == 1) {
       xcount += 1;
     }
-    else if(arr[i][0] == 0) {
+    else if(vars.board[i][0] == 0) {
       ocount += 1;
     }
 
@@ -188,11 +190,11 @@ const checkWinner = (arr) => {
   ocount = 0;
 
   //* Second column ---------------------------------
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i][1] == 1) {
+  for (let i = 0; i < vars.board.length; i++) {
+    if (vars.board[i][1] == 1) {
       xcount += 1;
     }
-    else if(arr[i][1] == 0) {
+    else if(vars.board[i][1] == 0) {
       ocount += 1;
     }
 
@@ -208,11 +210,11 @@ const checkWinner = (arr) => {
   ocount = 0;
 
   //* Third column ---------------------------------
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i][2] == 1) {
+  for (let i = 0; i < vars.board.length; i++) {
+    if (vars.board[i][2] == 1) {
       xcount += 1;
     }
-    else if(arr[i][2] == 0) {
+    else if(vars.board[i][2] == 0) {
       ocount += 1;
     }
 
@@ -231,11 +233,11 @@ const checkWinner = (arr) => {
 
   //? Main diagonal ------------------------------------
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i][i] == 1) {
+  for (let i = 0; i < vars.board.length; i++) {
+    if (vars.board[i][i] == 1) {
       xcount += 1;
     }
-    else if(arr[i][i] == 0) {
+    else if(vars.board[i][i] == 0) {
       ocount += 1;
     }
 
@@ -251,11 +253,11 @@ const checkWinner = (arr) => {
   ocount = 0;
 
    //? Secondary diagonal -----------------------------
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i][arr.length - i - 1] == 1) {
+  for (let i = 0; i < vars.board.length; i++) {
+    if (vars.board[i][vars.board.length - i - 1] == 1) {
       xcount += 1;
     }
-    else if(arr[i][arr.length - i - 1] == 0) {
+    else if(vars.board[i][vars.board.length - i - 1] == 0) {
       ocount += 1;
     }
 
@@ -275,19 +277,19 @@ const reset = () => {
     btn.remove();
   });
 
-  for(let i = 1; i < played.length; i++) {
-    played[i] = false;
+  for(let i = 1; i < vars.played.length; i++) {
+    vars.played[i] = false;
   }
 
-  for(let i = 0; i < board.length; i++) {
-    for(let j = 0; j < board[i].length; j++) {
-      board[i][j] = -1;
+  for(let i = 0; i < vars.board.length; i++) {
+    for(let j = 0; j < vars.board[i].length; j++) {
+      vars.board[i][j] = -1;
     }
   }
 
-  lastPlayed = 0;
+  vars.lastPlayed = 0;
 
-  gameOver = false;
+  vars.gameOver = false;
 
   const winMsgX = document.querySelector('#labelx');
   winMsgX.style.visibility = 'hidden';
@@ -299,10 +301,10 @@ const reset = () => {
   tieMsg.style.visibility = 'hidden';
 };
 
-boxes.forEach((box) => {
+vars.boxes.forEach((box) => {
     box.addEventListener('click', (event) => {
 
-      if(gameOver) { return; } 
+      if(vars.gameOver) { return; } 
 
       const target = event.target;
       const id = target.id;
@@ -311,7 +313,7 @@ boxes.forEach((box) => {
 
       play(target, id);
 
-      const checkWin = checkWinner(board); //* to call the function once not twice in the two ifs
+      const checkWin = checkWinner(vars.board); //* to call the function once not twice in the two ifs
 
       if(checkWin == 1) {
         const winMsg = document.querySelector('#labelx');
@@ -335,4 +337,4 @@ boxes.forEach((box) => {
     });
 });
 
-resetBtn.addEventListener('click', reset);
+vars.resetBtn.addEventListener('click', reset);
