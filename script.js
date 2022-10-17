@@ -291,14 +291,9 @@ const reset = () => {
 
   vars.gameOver = false;
 
-  const winMsgX = document.querySelector('#labelx');
-  winMsgX.style.visibility = 'hidden';
-
-  const winMsgO = document.querySelector('#labelo');
-  winMsgO.style.visibility = 'hidden';
-
-  const tieMsg = document.querySelector('#labelTie');
-  tieMsg.style.visibility = 'hidden';
+  const winMsg = document.querySelector('#winMsg');
+  winMsg.innerText = "Let's see who is better";
+  winMsg.style.color = 'cornflowerblue';
 };
 
 vars.boxes.forEach((box) => {
@@ -307,26 +302,27 @@ vars.boxes.forEach((box) => {
       if(vars.gameOver) { return; } 
 
       const target = event.target;
-      const id = target.id;
+      const targetID = target.id;
 
-      if(checkPlayedBefore(id)) { return; }
+      if(checkPlayedBefore(targetID)) { return; }
 
-      play(target, id);
+      play(target, targetID);
 
       const checkWin = checkWinner(vars.board); //* to call the function once not twice in the two ifs
+      const winMsg = document.querySelector('#winMsg');
 
       if(checkWin == 1) {
-        const winMsg = document.querySelector('#labelx');
-        winMsg.style.visibility = 'visible';
+        winMsg.innerHTML = 'Player1 Wins - <span style="color: purple;">X</span>';
+        winMsg.style.color = 'coral';
         gameOver = true;
       }
       else if(checkWin == 0) {
-        const winMsg = document.querySelector('#labelo');
-        winMsg.style.visibility = 'visible';
+        winMsg.innerHTML = 'Player2 Wins - <span style="color: red;">O</span>';
+        winMsg.style.color = 'coral';
         gameOver = true;
       }else if(checkTie()) {
-        const tieMsg = document.querySelector('#labelTie');
-        tieMsg.style.visibility = 'visible';
+        winMsg.innerHTML = `You both seem good It's a <span style="color: coral;">TIE</span>`;
+        winMsg.style.color = 'cornflowerblue';
         gameOver = true;
       }
 
