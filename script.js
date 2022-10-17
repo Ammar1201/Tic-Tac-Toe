@@ -308,7 +308,7 @@ vars.boxes.forEach((box) => {
 
       play(target, targetID);
 
-      const checkWin = checkWinner(vars.board); //* to call the function once not twice in the two ifs
+      const checkWin = checkWinner(); //* to call the function once not twice in the two ifs
       const winMsg = document.querySelector('#winMsg');
 
       if(checkWin == 1) {
